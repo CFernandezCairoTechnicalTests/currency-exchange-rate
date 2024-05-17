@@ -1,0 +1,21 @@
+spring:
+  neo4j:
+    uri: bolt://localhost:7687
+    authentication:
+        username: neo4j
+        password: password
+  kafka:
+    consumer:
+      group-id: neo4j-app
+      auto-offset-reset: earliest
+    producer:
+      bootstrap-servers: localhost:9092
+      ##bootstrap-servers: kafka-dev:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: moneda-findsubgraph-service
+    topics:
+      rate-ops-topic: rate-operations
+  config:
+    import: classpath:error-message.yml
