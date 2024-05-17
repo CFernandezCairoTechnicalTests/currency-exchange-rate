@@ -1,0 +1,39 @@
+server:
+  port: 9090
+
+  management:
+    endpoints:
+      web:
+        base-path: /
+      jmx:
+        exposure:
+          include: '*'
+      health:
+        show-details: always
+    health:
+      elasticsearch:
+        enabled: false
+
+
+spring:
+  elasticsearch:
+    uris: ${ES_URI:localhost}:9200
+  kafka:
+    bootstrap-servers: localhost:9092
+    ##bootstrap-servers: kafka-dev:9092
+    consumer:
+      group-id: elastic-app
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      #value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: quickstart-events
+    topics:
+      rate-ops-topic: rate-operations
+      service-findsubgraph-topic: moneda-findsubgraph-service
+  config:
+    import: classpath:error-message.yml
