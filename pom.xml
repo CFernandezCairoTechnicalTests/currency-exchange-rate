@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.2.1</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>cu.avangenio.technicaltest.cfernandezcairo</groupId>
+    <artifactId>currency-exchange-rateop</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+    <name>currency-exchange-rateop</name>
+    <description>Currency Exchange Rate Components</description>
+
+    <properties>
+        <java.version>17</java.version>
+
+        <testcontainers.version>1.19.7</testcontainers.version>
+
+        <!--<spring-cloud.version>2020.0.4</spring-cloud.version>
+        <spring-cloud-config-monitor.version>3.1.4</spring-cloud-config-monitor.version>
+        <spring-cloud-starter-bus-kafka.version>3.1.2</spring-cloud-starter-bus-kafka.version>-->
+
+        <docker.image.prefix>currency/exchange/rateOp</docker.image.prefix>
+        <docker-maven-plugin.version>1.2.2</docker-maven-plugin.version>
+        <docker.image.prefix>avangenio/currency_exchange_rate</docker.image.prefix>
+    </properties>
+
+    <url></url>
+    <organization>
+        <name></name>
+        <url></url>
+    </organization>
+
+    <scm>
+        <connection></connection>
+        <developerConnection></developerConnection>
+        <tag></tag>
+    </scm>
+
+    <profiles>
+        <profile>
+            <id>default</id>
+        </profile>
+    </profiles>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-javadoc-plugin</artifactId>
+                    <version>2.10.4</version>
+                    <executions>
+                        <execution>
+                            <id>attach-javadocs</id>
+                            <goals>
+                                <goal>jar</goal>
+                            </goals>
+                            <configuration>
+                                <javadocExecutable>${java.home}/../bin/javadoc</javadocExecutable>
+                                <doclet>org.umlgraph.doclet.UmlGraphDoc</doclet>
+                                <docletArtifact>
+                                    <groupId>org.umlgraph</groupId>
+                                    <artifactId>umlgraph</artifactId>
+                                    <version>5.6.6</version>
+                                </docletArtifact>
+                                <additionalparam>-views</additionalparam>
+                                <useStandardDocletOptions>true</useStandardDocletOptions>
+                                <!--<additionalparam>${javadoc.opts}</additionalparam>-->
+                            </configuration>
+                        </execution>
+                    </executions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+    </dependencies>
+
+    <modules>
+        <module>events-producer</module>
+        <module>elastic-app</module>
+        <module>neo4j-app</module>
+    </modules>
+</project>
