@@ -1,0 +1,18 @@
+application:
+  generate-events: true
+  amounts-events: 10
+  bound-events: 5000
+
+server:
+  port: 9898
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    ##bootstrap-servers: kafka-dev:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    template:
+      default-topic: rate-operations
+  config:
+    import: classpath:error-message.yml
